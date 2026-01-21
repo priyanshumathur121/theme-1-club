@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeoFit | JMIT WebSprint</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Inter:wght@300;400;600&display=swap');
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background: radial-gradient(circle at top right, #1e1b4b, #020617); background-attachment: fixed; color: white; margin: 0; }
+        .neo-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(20px); border-radius: 24px; transition: 0.3s; }
+        .neo-card:hover { border-color: #8b5cf6; transform: translateY(-5px); }
+        .accent-text { font-family: 'Syncopate', sans-serif; text-transform: uppercase; letter-spacing: 2px; }
+        .glow-btn { background: #7c3aed; box-shadow: 0 0 15px rgba(124, 58, 237, 0.5); transition: 0.3s; cursor: pointer; }
+        .glow-btn:hover { box-shadow: 0 0 25px rgba(124, 58, 237, 0.8); transform: scale(1.05); }
+    </style>
+</head>
+<body>
+
+    <nav class="sticky top-0 z-50 flex justify-between items-center p-6 bg-black/80 backdrop-blur-lg border-b border-white/10">
+        <div class="accent-text text-xl font-bold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">NEOFIT.SYS</div>
+        <div class="hidden md:flex gap-8 text-xs font-bold tracking-widest text-gray-400">
+            <a href="#home" class="hover:text-purple-400">HOME</a>
+            <a href="#dashboard" class="hover:text-purple-400">DASHBOARD</a>
+            <a href="#about" class="hover:text-purple-400">ABOUT</a>
+            <a href="#contact" class="hover:text-purple-400">CONTACT</a>
+        </div>
+        <button onclick="window.scrollTo({top:0, behavior:'smooth'}); newTip();" class="glow-btn px-4 py-2 rounded-lg text-xs font-bold">V1.0 LIVE</button>
+    </nav>
+
+    <section id="home" class="text-center py-20 px-6">
+        <h1 class="text-6xl font-black mb-4 accent-text">Beyond <br> <span class="text-purple-500">Limits.</span></h1>
+        <div class="neo-card max-w-md mx-auto p-4 inline-block mb-10">
+            <p id="healthTip" class="text-sm italic text-purple-200">"Loading daily health tip..."</p>
+        </div>
+    </section>
+
+    <main id="dashboard" class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-8 px-8 pb-20">
+        <div class="neo-card p-8 border-t-4 border-purple-500">
+            <h2 class="accent-text text-sm mb-6 text-purple-400 font-bold">Health Index (BMI)</h2>
+            <div class="space-y-4">
+                <input type="number" id="weight" placeholder="Mass (KG)" class="w-full bg-black/40 border border-white/10 p-4 rounded-xl outline-none focus:border-purple-500 text-white">
+                <input type="number" id="height" placeholder="Stature (CM)" class="w-full bg-black/40 border border-white/10 p-4 rounded-xl outline-none focus:border-purple-500 text-white">
+                <button onclick="calcBMI()" class="w-full glow-btn p-4 rounded-xl font-bold uppercase text-xs tracking-widest">Execute Scan</button>
+                <div id="bmiOut" class="hidden mt-4 p-6 rounded-2xl bg-white/5 border border-white/10 text-center">
+                    <span id="bmiVal" class="text-4xl font-black">--</span>
+                    <p id="bmiLabel" class="text-[10px] mt-2 uppercase tracking-[3px]"></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="neo-card p-8 border-t-4 border-cyan-500">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="accent-text text-sm text-cyan-400 font-bold">Activity Log</h2>
+                <span id="taskCount" class="text-[10px] bg-cyan-500/20 text-cyan-400 px-3 py-1 rounded-full font-bold">0 LOGGED</span>
+            </div>
+            <div class="flex gap-2 mb-6">
+                <input type="text" id="actIn" placeholder="E.g. 50 Pushups" class="flex-1 bg-black/40 border border-white/10 p-4 rounded-xl outline-none text-white">
+                <button onclick="addAct()" class="bg-cyan-500 px-6 rounded-xl font-bold text-black text-xs">LOG</button>
+            </div>
+            <div id="actList" class="space-y-3 max-h-60 overflow-y-auto pr-2"></div>
+        </div>
+    </main>
+
+  <section id="about" class="py-24 bg-black/30 border-y border-white/5 text-center">
+  <div class="max-w-4xl mx-auto px-8">
+
+    <h2 class="accent-text text-2xl mb-8">
+      System <span class="text-purple-500">Profile</span>
+    </h2>
+
+    <p class="text-gray-400 leading-loose mb-12">
+      Developed for Creative Fingers Club @ JMIT. NeoFit provides a distraction-free interface for health tracking.
+    </p>
+
+    <!-- Demo Video -->
+    <div class="mx-auto max-w-3xl rounded-2xl overflow-hidden
+                border border-white/10
+                shadow-lg shadow-purple-500/20">
+
+      <video
+        class="w-full h-auto"
+        src="5319426-uhd_2160_3840_25fps.mp4"
+        controls
+        muted
+        playsinline>
+      </video>
+
+    </div>
+
+  </div>
+</section>
+
+
+    <section id="contact" class="py-24 px-8">
+        <div class="max-w-xl mx-auto neo-card p-10">
+            <h2 class="accent-text text-xl mb-8">CONTACT<span class="text-cyan-500"><DETAILS></DETAILS></span></h2>
+            <form class="space-y-4" onsubmit="event.preventDefault(); alert('Message Sent!');">
+                <input type="text" placeholder="Name" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
+                <textarea placeholder="Message" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none h-24"></textarea>
+                <button type="submit" class="w-full bg-white text-black font-bold py-4 rounded-xl uppercase text-xs">Send</button>
+            </form>
+        </div>
+    </section>
+
+    <script>
+        const tips = ["Drink more water.", "Consistency is key.", "Sleep is recovery.", "Don't skip leg day."];
+        function newTip() { document.getElementById('healthTip').innerText = `"${tips[Math.floor(Math.random()*tips.length)]}"`; }
+        
+        function calcBMI() {
+            const w = document.getElementById('weight').value;
+            const h = document.getElementById('height').value / 100;
+            if(w && h) {
+                const bmi = (w/(h*h)).toFixed(1);
+                document.getElementById('bmiOut').classList.remove('hidden');
+                document.getElementById('bmiVal').innerText = bmi;
+                document.getElementById('bmiLabel').innerText = bmi < 25 ? "HEALTHY" : "OVERWEIGHT";
+                document.getElementById('bmiLabel').style.color = bmi < 25 ? "#22c55e" : "#ef4444";
+            }
+        }
+
+        let count = 0;
+        function addAct() {
+            const val = document.getElementById('actIn').value;
+            if(val) {
+                count++;
+                const div = document.createElement('div');
+                div.className = "flex justify-between p-4 bg-white/5 border border-white/5 rounded-xl";
+                div.innerHTML = `<span>> ${val}</span><button onclick="this.parentElement.remove(); count--; updateCount();">✕</button>`;
+                document.getElementById('actList').prepend(div);
+                document.getElementById('actIn').value = "";
+                updateCount();
+            }
+        }
+        function updateCount() { document.getElementById('taskCount').innerText = `${count} LOGGED`; }
+        window.onload = newTip;
+    </script>
+</body>
+</html>
